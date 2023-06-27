@@ -1,0 +1,3 @@
+{
+    "dotnet.defaultSolution": "fence\\backend\\frontend.sln"
+}
