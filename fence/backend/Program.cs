@@ -93,4 +93,4 @@ namespace FenceApp
             Console.ReadLine();
         }
     }
-}
+}}
