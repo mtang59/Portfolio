@@ -1,27 +1,49 @@
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using FenceWebApp.Data;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+namespace FenceWebApp
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var host = CreateWebHostBuilder(args).Build();
+
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var dbContext = services.GetRequiredService<CustomersDbContext>();
+
+                // Apply any pending migrations and seed data
+                dbContext.Database.Migrate();
+                // You can add any additional logic here, such as seeding initial data
+            }
+
+            host.Run();
+        }
+
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices((hostContext, services) =>
+                {
+                    // Other service registrations...
+
+                    services.AddDbContext<CustomersDbContext>(options =>
+                    { // DISABLED SSL 
+                        options.UseSqlServer("Server=MICHAEL;Database=FenceAppDB;Trusted_Connection=true;TrustServerCertificate=true;");
+                    });
+
+                    // Other service registrations...
+                })
+                .UseStartup<Program>();
+        
+        public void Configure(IApplicationBuilder app)
+        {
+            // Configure middleware here
+        }
+    }
 }
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-app.Run();
