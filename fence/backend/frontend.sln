@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.001.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "frontend", "frontend.csproj", "{8D4F82A7-36D5-4BF1-B35E-0C4632425BDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenceWebApp", "..\FenceAPI\FenceWebApp\FenceWebApp.csproj", "{15123C82-E6EF-49F0-BA8A-E263092CB695}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenceAPI", "..\FenceAPI\FenceAPI.csproj", "{15123C82-E6EF-49F0-BA8A-E263092CB695}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
