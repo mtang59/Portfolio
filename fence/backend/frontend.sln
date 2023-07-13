@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "frontend", "frontend.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FenceAPI", "..\FenceAPI\FenceAPI.csproj", "{15123C82-E6EF-49F0-BA8A-E263092CB695}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "..\API\API.csproj", "{4B8FA1C1-0584-462B-9916-15CA756AEE67}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{15123C82-E6EF-49F0-BA8A-E263092CB695}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15123C82-E6EF-49F0-BA8A-E263092CB695}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15123C82-E6EF-49F0-BA8A-E263092CB695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B8FA1C1-0584-462B-9916-15CA756AEE67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B8FA1C1-0584-462B-9916-15CA756AEE67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B8FA1C1-0584-462B-9916-15CA756AEE67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B8FA1C1-0584-462B-9916-15CA756AEE67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

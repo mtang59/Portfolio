@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using FenceWebApp.Models;
@@ -11,17 +12,24 @@ namespace FenceWebApp.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly CustomersDbContext _dbContext;
+        private readonly ILogger<CustomersController> _logger; // print messages to terminal
 
-        public CustomersController(CustomersDbContext dbContext)
+        public CustomersController(CustomersDbContext dbContext, ILogger<CustomersController> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         // GET: api/customers
         [HttpGet]
         public ActionResult<IEnumerable<Customer>> GetCustomers()
         {
-            var customers = _dbContext.Customers.ToList();
+            var customers = _dbContext.Customers.Where(c => c != null).ToList();
+            if (customers == null)
+            {
+                return NotFound();
+            }
+            _logger.LogInformation("Received GET request for /api/customers");
             return Ok(customers);
         }
 
@@ -81,13 +89,14 @@ namespace FenceWebApp.Controllers
 
             return NoContent();
         }
-        
-        // get API URL
-        [HttpGet]
-        public ActionResult<string> GetApiUrl()
+
+        // GET: api/customers/nextId
+        [HttpGet("nextId")]
+        public ActionResult<int> GetNextId()
         {
-            var apiUrl = $"{Request.Scheme}://{Request.Host}";
-            return apiUrl;
+            var maxId = _dbContext.Customers.Max(c => c.Id);
+            var nextId = maxId + 1;
+            return nextId;
         }
 
     }
